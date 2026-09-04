@@ -1,6 +1,6 @@
 # SIH26 — PS73 Weather Anomaly Detection
 
-Hackathon MVP for detecting anomalies in Automatic Weather Station readings.
+
 
 The complete Member 1 FastAPI backend is in [`backend/`](backend/README.md). It provides synthetic weather data, Isolation Forest detection, explainable domain rules, severity classification, frontend-ready APIs, and a live demo simulator.
 
