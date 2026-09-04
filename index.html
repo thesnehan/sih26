@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PS73 • WeatherGuard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">W</div><div><strong>WeatherGuard</strong><span>PS73 • AWS Monitor</span></div></div>
+    <nav>
+      <button class="nav-item active" data-section="overview">Overview</button>
+      <button class="nav-item" data-section="stations">Stations</button>
+      <button class="nav-item" data-section="alerts">Anomaly Alerts</button>
+    </nav>
+    <div class="side-card">
+      <div class="eyebrow">DEMO CONTROL</div>
+      <div id="simStatus" class="sim-status"><span class="dot"></span> Simulator stopped</div>
+      <label>Interval <select id="interval"><option value="2">2 sec</option><option value="5" selected>5 sec</option><option value="10">10 sec</option></select></label>
+      <div class="row">
+        <button id="startSim" class="btn primary">Start</button>
+        <button id="stopSim" class="btn ghost">Stop</button>
+      </div>
+      <button id="stepSim" class="btn wide">Generate one reading</button>
+    </div>
+    <div class="side-footer">AI + explainable rules<br><span>Isolation Forest • Rule Engine</span></div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">AUTOMATIC WEATHER STATIONS</div>
+        <h1 id="pageTitle">System overview</h1>
+      </div>
+      <div class="header-actions">
+        <div id="apiBadge" class="badge"><span class="dot"></span> Connecting…</div>
+        <button id="refresh" class="icon-btn" title="Refresh">↻</button>
+      </div>
+    </header>
+
+    <section id="overview" class="section active">
+      <div class="stats">
+        <article class="stat"><span>Stations online</span><strong id="stationCount">—</strong><small>Monitored AWS units</small></article>
+        <article class="stat"><span>Readings loaded</span><strong id="readingCount">—</strong><small>Historical + live feed</small></article>
+        <article class="stat alert-stat"><span>Active anomalies</span><strong id="anomalyCount">—</strong><small>Across all stations</small></article>
+        <article class="stat"><span>Critical alerts</span><strong id="criticalCount">—</strong><small>Immediate attention</small></article>
+      </div>
+
+      <div class="grid two">
+        <article class="panel">
+          <div class="panel-head"><div><h2>Station activity</h2><p>Latest temperature and anomaly state</p></div><button class="text-btn" data-jump="stations">View all →</button></div>
+          <div id="stationCards" class="station-grid"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head"><div><h2>Recent alerts</h2><p>Explainable detections from the rule engine + ML</p></div><button class="text-btn" data-jump="alerts">View feed →</button></div>
+          <div id="alertPreview" class="alert-list"></div>
+        </article>
+      </div>
+
+      <article class="panel chart-panel">
+        <div class="panel-head"><div><h2>Weather trend</h2><p id="chartSubtitle">AWS-01 • last 24 readings</p></div>
+          <select id="chartStation"></select>
+        </div>
+        <canvas id="trendChart"></canvas>
+      </article>
+    </section>
+
+    <section id="stations" class="section">
+      <div class="section-head"><div><div class="eyebrow">NETWORK</div><h2>All weather stations</h2></div><span id="stationUpdated" class="muted">—</span></div>
+      <div id="stationTable" class="panel table-wrap"></div>
+    </section>
+
+    <section id="alerts" class="section">
+      <div class="section-head"><div><div class="eyebrow">DETECTION FEED</div><h2>Anomaly alerts</h2></div>
+        <select id="severityFilter"><option value="">All severities</option><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select>
+      </div>
+      <div id="alertsTable" class="panel table-wrap"></div>
+    </section>
+
+    <div id="toast" class="toast"></div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
