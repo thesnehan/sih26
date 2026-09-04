@@ -1,2 +1,1 @@
-# sih26
-sih 2026
+ps73-weather-anomaly
